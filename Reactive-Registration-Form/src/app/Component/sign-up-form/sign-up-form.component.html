@@ -1,0 +1,124 @@
+<div class="container">
+    <div class="col-md-12">
+
+        <h1 class="">User Details</h1>
+        <form [formGroup]="UserDetailForm" class="form" (ngSubmit)="formSubmit(UserDetailForm.value)">
+           <div class="col-md-12 row">
+              
+            <div class="form-group col-md-4">
+                <label for="FirstName">First Name</label>
+                <input type="text" formControlName="FirstName" class="form-control" placeholder="Enter First Name"/>
+                <div class="alert alert-danger" [hidden]="!(show && UserDetailForm.get('FirstName').invalid && fetchFormData.FirstName.untouched )">FirstName is required</div>
+               
+                <div *ngIf="fetchFormData.FirstName.touched && fetchFormData.FirstName.invalid" class="alert alert-danger">
+                    <div *ngIf="fetchFormData.FirstName.errors.required">FirstName is required.</div>
+                    <div *ngIf="fetchFormData.FirstName.errors.pattern">FirstName can have alphabate and space and FirstName must be 3 character long</div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="LastName">Last Name</label>
+                <input type="text" formControlName="LastName" placeholder="Enter Last Name" class="form-control">
+                <div class="alert alert-danger" [hidden]="!(show && UserDetailForm.get('LastName').invalid && fetchFormData.LastName.untouched)">LastName is required</div>  
+                <div *ngIf="fetchFormData.LastName.touched && fetchFormData.LastName.invalid" class="alert alert-danger">
+                    <div *ngIf="fetchFormData.LastName.errors.required">LastName is required.</div>
+                    <div *ngIf="fetchFormData.LastName.errors.pattern">LastName can have alphabate and space and LastName must be 3 character long</div>
+                </div>
+            </div>
+         
+            <div class="form-group col-md-4">
+                <label for="Email">Email</label>
+                <input type="email" formControlName="Email" placeholder="Enter Email-ID" class="form-control">
+                <div class="alert alert-danger" [hidden]="!(show && UserDetailForm.get('Email').invalid && fetchFormData.Email.untouched)">Email is required</div>
+               
+                <div *ngIf="fetchFormData.Email.touched && fetchFormData.Email.invalid" class="alert alert-danger">
+                    <div *ngIf="fetchFormData.Email.errors.required">Email is required.</div>
+                    <div *ngIf="fetchFormData.Email.errors.email">Provide correct Email-ID.</div>
+                </div>
+            </div>
+               
+               
+            </div>
+            <br>
+            <div class="col-md-12 row">
+                <div class="form-group col-md-4">
+                    <label for="Password">Password</label>
+                    <input type="password" formControlName="Password" placeholder="Enter Your Password" class="form-control">
+                    <div class="alert alert-danger" [hidden]="!(show && UserDetailForm.get('Password').invalid && fetchFormData.Password.untouched)">Password is required</div>
+                   
+                    <div *ngIf="fetchFormData.Password.touched && fetchFormData.Password.invalid" class="alert alert-danger">
+                        <div *ngIf="fetchFormData.Password.errors.required">Password is required.</div>
+                        <div *ngIf="fetchFormData.Password.errors.pattern">Password should contain atleast 1 captial(A-Z) letter alphabate,number(0-9), special character(@_%#...) and must have 8 character long</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="Gender">Gender:</label>
+                    <div>
+                        <input type="radio" name="Gender" id="male" value="male" formControlName="Gender">
+                        <label for="male">Male</label> &nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="Gender" id="female" value="female" formControlName="Gender">
+                        <label for="female">Female</label>
+                        <div class="alert alert-danger" [hidden]="!(show && UserDetailForm.get('Gender').invalid && fetchFormData.Gender.untouched)">Gender is required</div>
+                       
+                        <div *ngIf="fetchFormData.Gender.touched && fetchFormData.Gender.invalid" class="alert alert-danger">
+                            <div *ngIf="fetchFormData.Gender.errors.required">Gender is required.</div>
+                        </div>
+                    </div>
+                </div>
+                
+          <div class="form-group col-md-4">
+              <label for="designation">Select Designation :</label>
+            <select class="custom-select" formControlName="Designation">
+                <option value="" disabled>Choose your Designation</option>
+                <option *ngFor="let desig of designation" [ngValue]="desig">{{desig}}</option>
+            </select>
+            <div class="alert alert-danger" [hidden]="!(show && UserDetailForm.get('Designation').invalid && fetchFormData.Designation.untouched)">Designation is required</div>
+                   
+            <div *ngIf="fetchFormData.Designation.touched && fetchFormData.Designation.invalid" class="alert alert-danger">
+                <div *ngIf="fetchFormData.Designation.errors.required">Designation is required.</div>
+                <div *ngIf="fetchFormData.Designation.errors.minlength">Password should be 8 character long.</div>
+            </div>
+          </div>
+         
+        </div> <br>
+        <div class="col-md-12 row">
+            <div class="col-md-3"></div>
+            <div class="form-group col-md-4">
+                <label for="DateOfBirth">Date Of Birth</label>
+                <input type="date" formControlName="DateOfBirth" id="DateOfBirth"  name="DateOfBirth" class="form-control">
+                <div class="alert alert-danger" [hidden]="!(show && UserDetailForm.get('DateOfBirth').invalid && fetchFormData.DateOfBirth.untouched)">Date Of Birth is required</div>
+                   
+                <div *ngIf="fetchFormData.DateOfBirth.touched && fetchFormData.DateOfBirth.invalid" class="alert alert-danger">
+                    <div *ngIf="fetchFormData.DateOfBirth.errors.required">Date Of Birth is required.</div>              
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="hobbies">Select Hobbies</label>
+              <ng-select
+              [items]="hobbies" bindLabel="name" placeholder="Select hobbbies" appendTo="body" [multiple]="true" formControlName="Hobbies">
+              </ng-select>
+              <div class="alert alert-danger" [hidden]="!(show && UserDetailForm.get('Hobbies').invalid && fetchFormData.Hobbies.untouched)">Hobbies is required</div>
+               
+              <div *ngIf="fetchFormData.Hobbies.touched && fetchFormData.Hobbies.invalid" class="alert alert-danger">
+                  <div *ngIf="fetchFormData.Hobbies.errors.required">Hobbie is required.</div>
+                  <div *ngIf="fetchFormData.Hobbies.errors.minlength">Password should be 8 character long.</div>
+              </div>
+            </div>
+           
+        </div>
+        <br>
+        <br>
+           <div class="col-md-12 row">
+             <div class="col-md-2"></div>
+            <div class="form-group col-md-5">
+                <input type="submit" name="send" (click)="show=true" class="btn btn-success col-md-6">
+                
+            </div>
+            <div class="form-group col-md-5">
+                <input type="reset" name="reset" (click)="reset()" class="btn btn-danger col-md-6">
+            </div>
+           </div>
+        </form>
+    </div>
+    
+    
+</div>
